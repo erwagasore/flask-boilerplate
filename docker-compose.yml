@@ -12,7 +12,7 @@ services:
     volumes:
       - './api:/api'
     ports:
-      - 5000:5000
+      - 6000:6000
     command: flask run -h 0.0.0.0
     env_file:
       - ./api/.flaskenv
@@ -46,9 +46,9 @@ services:
     image: postgres:alpine
     restart: always
     environment:
-      - POSTGRES_USER=pindo
-      - POSTGRES_PASSWORD=pind0App
-      - POSTGRES_DB=pindo
+      - POSTGRES_USER=boiler
+      - POSTGRES_PASSWORD=bo1lerplate
+      - POSTGRES_DB=db
     ports:
       - 54321:5432
     volumes:
@@ -58,9 +58,9 @@ services:
     image: postgres:alpine
     restart: always
     environment:
-      - POSTGRES_USER=pindo
-      - POSTGRES_PASSWORD=pind0App
-      - POSTGRES_DB=pindo_test
+      - POSTGRES_USER=boiler
+      - POSTGRES_PASSWORD=bo1lerplate
+      - POSTGRES_DB=db-test
     ports:
       - 54322:5432
     volumes:
