@@ -1,6 +1,6 @@
 FLASK_APP=api/app
 FLASK_ENV=development
-FLASK_MODE=app.config.development
+FLASK_MODE=app.config.Development
 
 SECRET_KEY=boiler
 

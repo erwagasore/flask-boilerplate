@@ -6,7 +6,7 @@ services:
     volumes:
       - cache:/data
 
-  postgres:
+  db:
     image: postgres:alpine
     environment:
       - POSTGRES_USER=boiler
@@ -17,7 +17,7 @@ services:
     volumes:
       - db:/var/lib/postgresql/data
 
-  postgres-test:
+  db-test:
     image: postgres:alpine
     environment:
       - POSTGRES_USER=boiler
@@ -37,8 +37,8 @@ services:
     command: celery worker -A app.worker.celery -l DEBUG --beat
     depends_on:
       - redis
-      - postgres
-      - postgres-test
+      - db
+      - db-test
     env_file:
       - ./api/.flaskenv
     volumes:
@@ -50,7 +50,7 @@ services:
     build:
       context: ./api
       dockerfile: Dockerfile
-    command: flask run -h 0.0.0.0 -p 6000 --with-threads
+    command: flask run -h 0.0.0.0 -p 6000
     depends_on:
       - celery
     ports:
