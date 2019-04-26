@@ -1,0 +1,8 @@
+from flask_bouncer import CREATE, READ, UPDATE, DELETE
+
+# general CRUDL
+CREATE = CREATE
+READ = READ
+UPDATE = UPDATE
+DELETE = DELETE
+LIST = 'list'
