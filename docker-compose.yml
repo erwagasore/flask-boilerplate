@@ -1,0 +1,82 @@
+version: '3.6'
+
+services:
+
+  api:
+    stdin_open: true
+    tty: true
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    restart: always
+    volumes:
+      - './api:/api'
+    ports:
+      - 5000:5000
+    command: flask run -h 0.0.0.0
+    env_file:
+      - ./api/.flaskenv
+    depends_on:
+      - celery
+
+  celery:
+    stdin_open: true
+    tty: true
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    restart: always
+    volumes:
+      - './api:/api'
+    command: celery -A app.worker.celery worker -l DEBUG --beat
+    env_file:
+      - ./api/.flaskenv
+    depends_on:
+      - db
+      - db-test
+      - redis
+
+  redis:
+    image: redis:alpine
+    restart: always
+    volumes:
+      - cache:/data
+      
+  db:
+    image: postgres:alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=pindo
+      - POSTGRES_PASSWORD=pind0App
+      - POSTGRES_DB=pindo
+    ports:
+      - 54321:5432
+    volumes:
+      - db:/var/lib/postgresql/data
+
+  db-test:
+    image: postgres:alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=pindo
+      - POSTGRES_PASSWORD=pind0App
+      - POSTGRES_DB=pindo_test
+    ports:
+      - 54322:5432
+    volumes:
+      - db-test:/var/lib/postgresql/data
+
+  nginx:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - 80:80
+    depends_on:
+      - api
+
+volumes:
+  db:
+  db-test:
+  cache:
