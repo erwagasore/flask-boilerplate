@@ -9,6 +9,7 @@ setup(
         'Flask==1.0.2',
 
         # database related
+        'psycopg2-binary==2.8.2',
         'Flask-SQLAlchemy==2.3.2',
         'Flask-Migrate==2.4.0',
 
@@ -28,8 +29,8 @@ setup(
         'celery==4.3.0',
         'gunicorn==19.9.0',
         'voluptuous==0.11.5',
-        'inflection==0.3.1',
-        'psycopg2-binary==2.8.2'
+        'python-dotenv==0.10.1',
+        'inflection==0.3.1'
     ],
     classifiers=[
         'Development Status :: 1 - Alpha',
