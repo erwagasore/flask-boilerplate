@@ -47,7 +47,7 @@ class APIFlask(Flask):
     def make_response(self, rv):
         if isinstance(rv, APIResult):
             return rv.to_response()
-        return Flask.make_response
+        return Flask.make_response(self, rv)
 
 
 def create_app(mode=os.environ.get('FLASK_MODE', 'app.config.Development')):
@@ -65,6 +65,8 @@ def create_app(mode=os.environ.get('FLASK_MODE', 'app.config.Development')):
 
     # register blueprints
     # add blueprint registration statements here
+    from app.users import users
+    app.register_blueprint(users)
 
     # register error handlers
     app.register_error_handler(400, bad_request)

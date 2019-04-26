@@ -39,6 +39,6 @@ def init_extensions(app):
     db.init_app(app)
     migrate.init_app(app, db)
     bcrypt.init_app(app)
-    CORS(app)
+    CORS(app, supports_credentials=True)
     bouncer.init_app(app)
     celery.conf.update(app.config)
