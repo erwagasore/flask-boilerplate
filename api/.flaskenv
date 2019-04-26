@@ -1,0 +1,12 @@
+FLASK_APP=api/app
+FLASK_ENV=development
+FLASK_MODE=app.config.development
+
+SECRET_KEY=boiler
+
+POSTGRES_DB=boiler
+POSTGRES_USER=boiler
+POSTGRES_PASSWORD=bo1lerplate
+POSTGRES_PORT=5432
+POSTGRES_HOST=db
+POSTGRES_TEST_HOST=db-test

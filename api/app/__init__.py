@@ -25,11 +25,14 @@ context_settings = dict(ignore_unknown_options=True, allow_extra_args=True)
 @click.option('--cov-report', default='term-missing',
               help="Start an interactive Python debugger on errors")
 @click.option('--cov-config', default='.coveragerc',
-              type=click.Path(exists=True, dir_okay=False), help="Config file for coverage")
-@click.option('--no-cov', is_flag=True, help="Disable coverage report completely")
+              type=click.Path(exists=True, dir_okay=False),
+              help="Config file for coverage")
+@click.option('--no-cov', is_flag=True,
+              help="Disable coverage report completely")
 @click.option('--no-cov-on-fail', is_flag=True, default=True,
               help="No coverage report if test run fails")
-@click.argument('file-or-dir', nargs=-1, type=click.Path(exists=True), required=True)
+@click.argument('file-or-dir', nargs=-1,
+                type=click.Path(exists=True), required=True)
 @click.pass_context
 def test(ctx, exitfirst, strict, pdb, flake8,
          cov, cov_report, cov_config, no_cov, no_cov_on_fail,
@@ -60,8 +63,8 @@ def test(ctx, exitfirst, strict, pdb, flake8,
 @app.cli.command(context_settings=context_settings)
 @click.option('--username', '-u', prompt=True, help='Please enter username')
 @click.option('--email', '-e', prompt=True, help='Please enter email')
-@click.option('--password', '-p', prompt=True, hide_input=True, confirmation_prompt=True,
-              help='Please enter password')
+@click.option('--password', '-p', prompt=True, hide_input=True,
+              confirmation_prompt=True, help='Please enter password')
 def initdb(username, email, password):
     """
     Initialize database with seed data
