@@ -15,8 +15,7 @@ class TestApp:
     def test_config(self, config):
         assert config['PROJECT_DIR'].endswith('/api')
         assert config['DB_URI'] == 'postgresql://{}:{}@db-test:{}/{}_test'.format(
-            config['DB_USER'], config['DB_PASS'],
-            config['DB_PORT'], config['DB']
+            config['DB_USER'], config['DB_PASS'], config['DB_PORT'], config['DB']
         )
 
     def test_api_results(self):
@@ -49,9 +48,7 @@ class TestApp:
 
         result = exception.to_result()
         assert result.status == 400
-        assert result.value == {
-            'error': 'error', 'message': 'error', 'status': 400
-        }
+        assert result.value == {'error': 'error', 'message': 'error', 'status': 400}
 
         exception = APIException('not found', 404)
         assert exception.status == 404
@@ -59,9 +56,7 @@ class TestApp:
 
         result = exception.to_result()
         assert result.status == 404
-        assert result.value == {
-            'error': 'not found', 'message': 'not found', 'status': 404
-        }
+        assert result.value == {'error': 'not found', 'message': 'not found', 'status': 404}
 
     def test_flask_make_response(self, app):
         response_text = "Output Text"
@@ -91,7 +86,7 @@ class TestApp:
         # test initdb command
         # create superuser and seed data
         result = runner.invoke(
-            initdb, ['', '-u', 'remy', '-e', 'remy@pindo.io', '-p', 'remy'])
+            initdb, ['', '-u', 'flask', '-e', 'flask@boiler.pt', '-p', 'flask'])
         assert result.exit_code == 0
         assert result.exception is None
 
@@ -99,11 +94,11 @@ class TestApp:
         superuser = User.query.first()
         assert User.query.count() == 2
         assert User.query.get(-1).username == 'anon'
-        assert superuser.username == 'remy'
+        assert superuser.username == 'flask'
 
         # duplicate superuser
         result = runner.invoke(
-            initdb, ['-u', 'remy', '-e', 'remy@pindo.io', '-p', 'pindo'])
+            initdb, ['-u', 'flask', '-e', 'flask@boiler.pt', '-p', 'flask'])
         assert result.exit_code == 1
 
     def test_unhautorized_token_fake_creds(self, user, db_session, fake_credentials):
