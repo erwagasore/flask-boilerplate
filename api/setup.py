@@ -14,7 +14,7 @@ setup(
         'Flask-Migrate==2.4.0',
 
         # authentication & security
-        'Flask-Cors==3.0.7',
+        'Flask-Cors==3.0.9',
         'Flask-Bcrypt==0.7.1',
         'Flask-HTTPAuth==3.2.4',
         'Flask-Bouncer==0.1.13',
