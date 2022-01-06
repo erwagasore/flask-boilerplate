@@ -26,7 +26,7 @@ setup(
         'pytest-flake8== 1.0.4',
 
         'redis==3.2.1',
-        'celery==4.3.0',
+        'celery==5.2.2',
         'gunicorn==19.9.0',
         'voluptuous==0.11.5',
         'python-dotenv==0.10.1',
